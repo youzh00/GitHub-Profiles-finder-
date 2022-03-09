@@ -1,30 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Spinner from '../layouts/Spinner'
 import UserItem from './UserItem'
+import GithubContext from '../../context/GithubContext'
 
 export default function UserResults() {
-    const [users,setUsers]=useState([])
-    const [loading,setLoading]=useState(true)
-
-    const githubURL="https://api.github.com"
-    const githubTOKEN="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"
-
+    const {users,loading,fetchUsers}=useContext(GithubContext)
     useEffect(()=>{
-        
             fetchUsers()
-        
-    },[]
-    )
-    const fetchUsers=async ()=>{
-        const response =await fetch(`${githubURL}/users`,{
-            headers:{
-                Authorization:`token: ${githubTOKEN}`
-            }
-        })
-        const data=await response.json()
-        setUsers(data)
-        setLoading(false)
-    }
+    },[])
+
+    //////////// return value
     if(!loading){
         return (
             <div className='grid grid-cols-1 gap-8 xl:grid-cols-4
