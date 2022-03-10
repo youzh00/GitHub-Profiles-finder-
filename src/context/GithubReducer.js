@@ -9,7 +9,7 @@ const githubReducer = (state, action) => {
     case "setLoading":
       return {
         ...state,
-        loading: true,
+        loading: false,
       };
     default:
       return state;
